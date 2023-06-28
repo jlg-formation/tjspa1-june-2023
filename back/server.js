@@ -4,6 +4,11 @@ const app = express()
 
 const publicDir = '.'
 
+app.use((req, res, next)=>{
+  console.log('req: ', req.url, req.method);
+  next()
+})
+
 app.use(express.static(publicDir))
 app.use(serveIndex(publicDir, {icons: true}))
 
