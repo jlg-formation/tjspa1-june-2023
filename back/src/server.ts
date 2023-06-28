@@ -1,15 +1,19 @@
-const express = require("express");
-const serveIndex = require("serve-index");
-const api = require("./api");
+import express, { Request } from "express";
+import serveIndex from "serve-index";
+import { api } from "./api";
+import { Response } from "express";
+import { NextFunction } from "express";
 
 const app = express();
 
 const publicDir = ".";
 
-app.use((req, res, next) => {
+const logger = (req: Request, res: Response, next: NextFunction) => {
   console.log("req: ", req.url, req.method);
   next();
-});
+};
+
+app.use(logger);
 
 app.use("/api", api);
 
