@@ -1,3 +1,5 @@
+import "./BodyLayout.scss";
+
 export default function BodyLayout() {
-  return <p>Body works!</p>;
+  return <div className="BodyLayout">Body works...</div>;
 }
