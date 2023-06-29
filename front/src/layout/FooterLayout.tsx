@@ -1,3 +1,9 @@
+import "./FooterLayout.scss";
+
 export default function FooterLayout() {
-  return <p>Footer works!</p>;
+  return (
+    <footer>
+      <a href="#">Mentions Légales</a>
+    </footer>
+  );
 }
