@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./AddRoute.scss";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function AddRoute() {
   return (
@@ -18,7 +20,10 @@ export default function AddRoute() {
           <input type="text" />
         </label>
 
-        <button className="primary">Ajouter</button>
+        <button className="primary">
+          <FontAwesomeIcon icon={faPlus} />
+          <span>Ajouter</span>
+        </button>
       </form>
     </main>
   );
