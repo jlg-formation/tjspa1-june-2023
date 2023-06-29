@@ -1,3 +1,3 @@
-export default function HomeRoute() {
+export default function LegalRoute() {
   return <p>Legal Route</p>;
 }

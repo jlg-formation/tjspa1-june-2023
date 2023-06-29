@@ -1,6 +1,7 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
-import VerticalLayout from "./layout/VerticalLayout";
+import { router } from "./routes/config";
 
 export default function App() {
-  return <VerticalLayout />;
+  return <RouterProvider router={router} />;
 }
