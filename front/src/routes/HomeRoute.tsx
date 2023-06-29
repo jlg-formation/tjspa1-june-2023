@@ -7,8 +7,6 @@ export default function HomeRoute() {
       <a href="#" className="button primary">
         Voir le stock
       </a>
-      <button disabled>Voir le stock</button>
-      <button>Voir le stock</button>
     </main>
   );
 }
