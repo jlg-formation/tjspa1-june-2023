@@ -1,3 +1,13 @@
+import BodyLayout from "./BodyLayout";
+import FooterLayout from "./FooterLayout";
+import HeaderLayout from "./HeaderLayout";
+
 export default function VerticalLayout() {
-  return <p>Vertical works!</p>;
+  return (
+    <>
+      <HeaderLayout />
+      <BodyLayout />
+      <FooterLayout />
+    </>
+  );
 }

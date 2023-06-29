@@ -1,0 +1,15 @@
+header {
+  height: 3em;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+
+  a {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 2.5em;
+    }
+  }
+}
