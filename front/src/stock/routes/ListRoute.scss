@@ -1,4 +1,9 @@
 main.ListRoute {
+  div.content {
+    display: flex;
+    flex-flow: column;
+    gap: 2em;
+  }
   nav {
     display: flex;
     gap: 0.3em;
