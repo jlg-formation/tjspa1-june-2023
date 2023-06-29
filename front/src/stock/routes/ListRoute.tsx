@@ -6,6 +6,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import "./ListRoute.scss";
+import { Article } from "../interfaces/Article";
+
+const articles: Article[] = [
+  { id: "a1", name: "Tournevis", price: 2.99, qty: 450 },
+  { id: "a2", name: "Pelle", price: 5.5, qty: 52 },
+];
 
 export default function ListRoute() {
   return (
@@ -32,26 +38,13 @@ export default function ListRoute() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="name">Tournevis</td>
-              <td className="price">2.99 €</td>
-              <td className="qty">152</td>
-            </tr>
-            <tr className="selected">
-              <td className="name">Pelle</td>
-              <td className="price">5.50 €</td>
-              <td className="qty">10</td>
-            </tr>
-            <tr>
-              <td className="name">Marteau</td>
-              <td className="price">1.20 €</td>
-              <td className="qty">15</td>
-            </tr>
-            <tr>
-              <td className="name">Pioche</td>
-              <td className="price">2.33 €</td>
-              <td className="qty">122</td>
-            </tr>
+            {articles.map((a) => (
+              <tr key={a.id}>
+                <td className="name">{a.name}</td>
+                <td className="price">{a.price} €</td>
+                <td className="qty">{a.qty}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
