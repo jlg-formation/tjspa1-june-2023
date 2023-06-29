@@ -7,13 +7,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import "./ListRoute.scss";
 import { Article } from "../interfaces/Article";
-
-const articles: Article[] = [
-  { id: "a1", name: "Tournevis", price: 2.99, qty: 450 },
-  { id: "a2", name: "Pelle", price: 5.5, qty: 52 },
-];
+import { useEffect, useState } from "react";
 
 export default function ListRoute() {
+  const ARTICLES: Article[] = [
+    { id: "a1", name: "Tournevis", price: 2.99, qty: 450 },
+    { id: "a2", name: "Pelle", price: 5.5, qty: 52 },
+  ];
+  const [articles, setArticles] = useState(ARTICLES);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("add 3eme art");
+      ARTICLES.push({ id: "a3", name: "Rateau", price: 2.99, qty: 450 });
+      setArticles([...ARTICLES]);
+    }, 2000);
+  }, []);
+
   return (
     <main className="ListRoute">
       <h1>Liste des articles</h1>
