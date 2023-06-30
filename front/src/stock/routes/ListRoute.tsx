@@ -8,14 +8,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useArticleStore } from "../../store/article.store";
 import "./ListRoute.scss";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function ListRoute() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const articleStore = useArticleStore();
 
-  const handleRefresh = async () => {
+  const handleRefresh = useCallback(async () => {
     try {
       console.log("refresh");
       setErrorMsg("");
@@ -28,7 +28,13 @@ export default function ListRoute() {
     } finally {
       setIsRefreshing(false);
     }
-  };
+  }, [articleStore]);
+
+  useEffect(() => {
+    if (articleStore.articles === undefined) {
+      handleRefresh();
+    }
+  }, [articleStore.articles, handleRefresh]);
 
   return (
     <main className="ListRoute">

@@ -7,6 +7,10 @@ const articles = [
   { id: "a2", name: "Pelle", price: 5.5, qty: 52 },
 ];
 
+app.use((req, res, next) => {
+  setTimeout(next, 2000);
+});
+
 app.get("/articles", (req, res) => {
   res.json(articles);
 });
