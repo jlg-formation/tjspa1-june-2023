@@ -70,11 +70,9 @@ export default function ListRoute() {
           <Link to="./add" className="button" title="Ajouter">
             <FontAwesomeIcon icon={faPlus} />
           </Link>
-          {selectedArticles.size > 0 && (
-            <button title="Supprimer">
-              <FontAwesomeIcon icon={faTrashCan} />
-            </button>
-          )}
+          <button title="Supprimer" hidden={selectedArticles.size === 0}>
+            <FontAwesomeIcon icon={faTrashCan} />
+          </button>
         </nav>
         <div className="error">{errorMsg}</div>
         <table>
