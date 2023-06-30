@@ -6,7 +6,7 @@ import { NextFunction } from "express";
 
 const app = express();
 
-const publicDir = ".";
+const publicDir = "../front/dist";
 
 const logger = (req: Request, res: Response, next: NextFunction) => {
   console.log("req: ", req.url, req.method);
