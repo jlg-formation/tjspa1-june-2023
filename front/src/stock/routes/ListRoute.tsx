@@ -52,6 +52,11 @@ export default function ListRoute() {
     setSelectedArticles(new Set(selectedArticles));
   };
 
+  const handleRemove = () => {
+    const ids = [...selectedArticles].map((a) => a.id);
+    articleStore.remove(ids);
+  };
+
   return (
     <main className="ListRoute">
       <h1>Liste des articles</h1>
@@ -70,7 +75,11 @@ export default function ListRoute() {
           <Link to="./add" className="button" title="Ajouter">
             <FontAwesomeIcon icon={faPlus} />
           </Link>
-          <button title="Supprimer" hidden={selectedArticles.size === 0}>
+          <button
+            title="Supprimer"
+            hidden={selectedArticles.size === 0}
+            onClick={handleRemove}
+          >
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
         </nav>

@@ -16,6 +16,10 @@ class API {
     const articles: Article[] = await response.json();
     return articles;
   }
+
+  async remove(ids: string[]): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export const api = new API();
