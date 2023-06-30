@@ -11,12 +11,18 @@ import "./ListRoute.scss";
 export default function ListRoute() {
   const articleStore = useArticleStore();
 
+  const handleRefresh = async () => {
+    console.log("refresh");
+    await articleStore.refresh();
+    console.log("refresh done");
+  };
+
   return (
     <main className="ListRoute">
       <h1>Liste des articles</h1>
       <div className="content">
         <nav>
-          <button title="Rafraîchir">
+          <button title="Rafraîchir" onClick={handleRefresh}>
             <FontAwesomeIcon icon={faRotateRight} />
           </button>
           <Link to="./add" className="button" title="Ajouter">
