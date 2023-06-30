@@ -14,6 +14,7 @@ import { Article } from "../interfaces/Article";
 export default function ListRoute() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
   const [selectedArticles, setSelectedArticles] = useState(new Set<Article>());
 
   const articleStore = useArticleStore();
@@ -52,9 +53,21 @@ export default function ListRoute() {
     setSelectedArticles(new Set(selectedArticles));
   };
 
-  const handleRemove = () => {
-    const ids = [...selectedArticles].map((a) => a.id);
-    articleStore.remove(ids);
+  const handleRemove = async () => {
+    try {
+      console.log("remove");
+      setErrorMsg("");
+      setIsRemoving(true);
+      const ids = [...selectedArticles].map((a) => a.id);
+      await articleStore.remove(ids);
+      await articleStore.refresh();
+      setSelectedArticles(new Set());
+    } catch (err) {
+      console.log("err: ", err);
+      setErrorMsg("Erreur Technique");
+    } finally {
+      setIsRemoving(false);
+    }
   };
 
   return (
@@ -79,8 +92,12 @@ export default function ListRoute() {
             title="Supprimer"
             hidden={selectedArticles.size === 0}
             onClick={handleRemove}
+            disabled={isRemoving}
           >
-            <FontAwesomeIcon icon={faTrashCan} />
+            <FontAwesomeIcon
+              icon={isRemoving ? faCircleNotch : faTrashCan}
+              spin={isRemoving}
+            />
           </button>
         </nav>
         <div className="error">{errorMsg}</div>
