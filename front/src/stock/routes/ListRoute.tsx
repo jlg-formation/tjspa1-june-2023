@@ -21,6 +21,7 @@ export default function ListRoute() {
   const handleRefresh = useCallback(async () => {
     try {
       console.log("refresh");
+      setSelectedArticles(new Set());
       setErrorMsg("");
       setIsRefreshing(true);
       await articleStore.refresh();
@@ -69,9 +70,11 @@ export default function ListRoute() {
           <Link to="./add" className="button" title="Ajouter">
             <FontAwesomeIcon icon={faPlus} />
           </Link>
-          <button title="Supprimer">
-            <FontAwesomeIcon icon={faTrashCan} />
-          </button>
+          {selectedArticles.size > 0 && (
+            <button title="Supprimer">
+              <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+          )}
         </nav>
         <div className="error">{errorMsg}</div>
         <table>
