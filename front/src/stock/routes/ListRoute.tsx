@@ -42,6 +42,11 @@ export default function ListRoute() {
   }, [articleStore.articles, handleRefresh]);
 
   const handleSelect = (a: Article) => () => {
+    if (selectedArticles.has(a)) {
+      selectedArticles.delete(a);
+      setSelectedArticles(new Set(selectedArticles));
+      return;
+    }
     selectedArticles.add(a);
     setSelectedArticles(new Set(selectedArticles));
   };
