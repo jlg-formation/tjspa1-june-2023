@@ -7,14 +7,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useArticleStore } from "../../store/article.store";
 import "./ListRoute.scss";
+import { useState } from "react";
 
 export default function ListRoute() {
+  const [errorMsg, setErrorMsg] = useState("");
   const articleStore = useArticleStore();
 
   const handleRefresh = async () => {
-    console.log("refresh");
-    await articleStore.refresh();
-    console.log("refresh done");
+    try {
+      console.log("refresh");
+      await articleStore.refresh();
+      console.log("refresh done");
+    } catch (err) {
+      console.log("err: ", err);
+      setErrorMsg("Erreur Technique");
+    }
   };
 
   return (
@@ -32,6 +39,7 @@ export default function ListRoute() {
             <FontAwesomeIcon icon={faTrashCan} />
           </button>
         </nav>
+        <div className="error">{errorMsg}</div>
         <table>
           <thead>
             <tr>
