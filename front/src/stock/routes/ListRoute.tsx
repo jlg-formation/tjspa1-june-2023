@@ -31,6 +31,8 @@ export default function ListRoute() {
   }, [articleStore]);
 
   useEffect(() => {
+    console.log("use effect");
+
     if (articleStore.articles === undefined) {
       handleRefresh();
     }
