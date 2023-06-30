@@ -27,6 +27,10 @@ app.use("/api", api);
 app.use(express.static(publicDir));
 app.use(serveIndex(publicDir, { icons: true }));
 
+app.get("/**", (req, res) => {
+  res.sendFile("index.html", { root: publicDir });
+});
+
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
