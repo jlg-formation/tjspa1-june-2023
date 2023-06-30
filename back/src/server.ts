@@ -15,12 +15,12 @@ const logger = (req: Request, res: Response, next: NextFunction) => {
 
 app.use(logger);
 
-app.use("/api", (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  res.setHeader("Access-Control-Allow-Methods", "*");
-  next();
-});
+// app.use("/api", (req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Headers", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "*");
+//   next();
+// });
 
 app.use("/api", api);
 

@@ -1,6 +1,6 @@
 import { Article, NewArticle } from "../stock/interfaces/Article";
 
-const url = "http://localhost:3000/api/articles";
+const url = "/api/articles";
 
 class API {
   async add(newArticle: NewArticle): Promise<void> {
