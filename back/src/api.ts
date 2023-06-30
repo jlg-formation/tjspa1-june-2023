@@ -9,7 +9,7 @@ const articles = [
 ];
 
 app.use((req, res, next) => {
-  setTimeout(next, 2000);
+  setTimeout(next, 300);
 });
 
 app.get("/articles", (req, res) => {
