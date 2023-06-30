@@ -15,6 +15,13 @@ main.ListRoute {
     font-weight: bold;
   }
 
+  div.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
   table {
     border: 0.1em solid #bbb;
 

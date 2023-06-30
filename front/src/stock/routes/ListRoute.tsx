@@ -62,13 +62,24 @@ export default function ListRoute() {
             </tr>
           </thead>
           <tbody>
-            {articleStore.articles.map((a) => (
-              <tr key={a.id}>
-                <td className="name">{a.name}</td>
-                <td className="price">{a.price} €</td>
-                <td className="qty">{a.qty}</td>
+            {articleStore.articles === undefined ? (
+              <tr>
+                <td colSpan={3}>
+                  <div className="loading">
+                    <FontAwesomeIcon icon={faCircleNotch} spin />
+                    <span>Chargement...</span>
+                  </div>
+                </td>
               </tr>
-            ))}
+            ) : (
+              articleStore.articles.map((a) => (
+                <tr key={a.id}>
+                  <td className="name">{a.name}</td>
+                  <td className="price">{a.price} €</td>
+                  <td className="qty">{a.qty}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
