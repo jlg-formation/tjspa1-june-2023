@@ -18,7 +18,11 @@ class API {
   }
 
   async remove(ids: string[]): Promise<void> {
-    throw new Error("Method not implemented.");
+    await fetch(url, {
+      method: "DELETE",
+      body: JSON.stringify(ids),
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
 
