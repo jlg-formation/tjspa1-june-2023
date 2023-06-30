@@ -1,15 +1,21 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEventHandler, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddRoute.scss";
+import { useArticleStore } from "../../store/article.store";
+import { NewArticle } from "../interfaces/Article";
 
 export default function AddRoute() {
   const [name, setName] = useState("Truc");
   const [price, setPrice] = useState(0);
   const [qty, setQty] = useState(0);
 
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+
   const navigate = useNavigate();
+  const articleStore = useArticleStore();
 
   const handleName: ChangeEventHandler<HTMLInputElement> = (event) => {
     setName(event.target.value);
@@ -21,11 +27,22 @@ export default function AddRoute() {
     setQty(+event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    console.log("event: ", event);
-
-    navigate("..");
+  const handleSubmit = async (event: FormEvent) => {
+    try {
+      event.preventDefault();
+      setErrorMsg("");
+      setIsAdding(true);
+      console.log("event: ", event);
+      const newArticle: NewArticle = { name, price, qty };
+      await articleStore.add(newArticle);
+      await articleStore.refresh();
+      navigate("..");
+    } catch (err) {
+      console.log("err: ", err);
+      setErrorMsg("Erreur Technique");
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   return (
@@ -54,9 +71,12 @@ export default function AddRoute() {
             onChange={handleQty}
           />
         </label>
-
-        <button className="primary">
-          <FontAwesomeIcon icon={faPlus} />
+        <div className="error">{errorMsg}</div>
+        <button className="primary" disabled={isAdding}>
+          <FontAwesomeIcon
+            icon={isAdding ? faCircleNotch : faPlus}
+            spin={isAdding}
+          />
           <span>Ajouter</span>
         </button>
       </form>
