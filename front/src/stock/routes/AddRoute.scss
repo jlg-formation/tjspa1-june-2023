@@ -18,8 +18,12 @@ main.AddRoute {
       }
     }
 
-    button {
-      margin-top: 3em;
+    div.error {
+      height: 3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
   }
 }
