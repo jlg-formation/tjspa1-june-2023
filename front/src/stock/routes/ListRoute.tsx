@@ -1,4 +1,5 @@
 import {
+  faCircleNotch,
   faPlus,
   faRotateRight,
   faTrashCan,
@@ -11,16 +12,21 @@ import { useState } from "react";
 
 export default function ListRoute() {
   const [errorMsg, setErrorMsg] = useState("");
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const articleStore = useArticleStore();
 
   const handleRefresh = async () => {
     try {
       console.log("refresh");
+      setErrorMsg("");
+      setIsRefreshing(true);
       await articleStore.refresh();
       console.log("refresh done");
     } catch (err) {
       console.log("err: ", err);
       setErrorMsg("Erreur Technique");
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -29,8 +35,15 @@ export default function ListRoute() {
       <h1>Liste des articles</h1>
       <div className="content">
         <nav>
-          <button title="Rafraîchir" onClick={handleRefresh}>
-            <FontAwesomeIcon icon={faRotateRight} />
+          <button
+            title="Rafraîchir"
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+          >
+            <FontAwesomeIcon
+              icon={isRefreshing ? faCircleNotch : faRotateRight}
+              spin={isRefreshing}
+            />
           </button>
           <Link to="./add" className="button" title="Ajouter">
             <FontAwesomeIcon icon={faPlus} />
